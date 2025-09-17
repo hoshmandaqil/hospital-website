@@ -1,0 +1,257 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+    --color-accent: var(--color-neutral-800);
+    --color-accent-content: var(--color-neutral-800);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
+
+/* Custom Doctor Section Styles */
+@layer components {
+    .doctor-card {
+        @apply relative overflow-hidden;
+        box-shadow:
+            0 25px 50px -12px rgba(0, 0, 0, 0.25),
+            0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .doctor-card:hover {
+        box-shadow:
+            0 32px 64px -12px rgba(0, 0, 0, 0.35),
+            0 0 0 1px rgba(255, 255, 255, 0.2),
+            0 0 40px rgba(20, 184, 166, 0.15);
+    }
+
+    .hover\:scale-102:hover {
+        transform: scale(1.02);
+    }
+
+    .doctor-image {
+        @apply transition-transform duration-700 ease-out;
+    }
+
+    .doctor-card:hover .doctor-image {
+        @apply scale-110;
+    }
+
+    .doctor-badge {
+        @apply backdrop-blur-md;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .doctor-rating-badge {
+        background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+        box-shadow: 0 8px 32px rgba(20, 184, 166, 0.3);
+    }
+
+    .doctor-hover-overlay {
+        background: linear-gradient(
+            to top,
+            rgba(20, 184, 166, 0.9) 0%,
+            rgba(20, 184, 166, 0.2) 50%,
+            transparent 100%
+        );
+    }
+
+    .doctor-button {
+        background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+        box-shadow: 0 8px 32px rgba(20, 184, 166, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .doctor-button:hover {
+        background: linear-gradient(135deg, #0d9488 0%, #059669 100%);
+        box-shadow: 0 12px 40px rgba(20, 184, 166, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .view-all-button {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 2px solid rgba(20, 184, 166, 0.2);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .view-all-button:hover {
+        background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+        border-color: transparent;
+        box-shadow: 0 25px 50px rgba(20, 184, 166, 0.3);
+        transform: translateY(-3px) scale(1.02);
+    }
+
+    .doctor-title {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .doctor-title-accent {
+        background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .background-pattern {
+        background: radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    }
+
+    /* Animation keyframes */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(20, 184, 166, 0.3); }
+        50% { box-shadow: 0 0 40px rgba(20, 184, 166, 0.6); }
+    }
+
+    .doctor-card:hover {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .doctor-button:hover {
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    /* Footer Styles */
+    .footer-link {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .footer-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .footer-link:hover::before {
+        left: 100%;
+    }
+
+    .footer-social-icon {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .footer-social-icon:hover {
+        background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+        border-color: transparent;
+        box-shadow: 0 8px 32px rgba(20, 184, 166, 0.3);
+        transform: translateY(-2px) scale(1.05);
+    }
+
+    .footer-contact-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .footer-contact-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(20, 184, 166, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .footer-gradient-text {
+        background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .footer-bottom-link {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .footer-bottom-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #14b8a6, #10b981);
+        transition: width 0.3s ease;
+    }
+
+    .footer-bottom-link:hover::after {
+        width: 100%;
+    }
+}
